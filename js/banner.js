@@ -16,7 +16,7 @@ if(winW/winH<desW/desH){//按照高度比例去缩放
     oLi.addEventListener("touchstart",start,false);
     oLi.addEventListener("touchmove",move,false);
     oLi.addEventListener("touchend",end,false);
-})
+});
 
 function start(e){
     this.startX = e.changedTouches[0].pageY;
@@ -64,16 +64,28 @@ function end(e){
 document.addEventListener("touchmove",function(){
 },false);
 
-var audioBtn=document.querySelector("#audio-btn");
-var media=document.querySelector("#media");
 
-audioBtn.onclick = function(){
-    if (media.paused) {
-        media.play();
-        audioBtn.id="audio-btn";
-    }
-    else {
-        media.pause();
-        audioBtn.id="";
-    }
-};
+
+~function () {
+    var audioBox = document.querySelector(".audio"),
+        myAudio = audioBox.getElementsByTagName("audio")[0];
+
+    window.setTimeout(function () {
+        myAudio.play();
+        myAudio.addEventListener("canplay", function () {
+            audioBox.style.display = "block";
+            audioBox.className += " audioMove";
+        }, false);
+    }, 1000);
+
+    audioBox.addEventListener("click", function () {
+        if (myAudio.paused) {
+            myAudio.play();
+            audioBox.className = "audio audioMove";
+            return;
+        }else{
+            myAudio.pause();
+            audioBox.className = "audio audioStop";
+        }
+    }, false);
+}();
