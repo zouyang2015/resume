@@ -4,9 +4,9 @@ var winW = document.documentElement.clientWidth;
 var winH = document.documentElement.clientHeight;
 var desW = 640;
 var desH = 1008;
-if(winW/winH<desW/desH){//按照高度比例去缩放
+if(winW/winH<desW/desH){
     main.style.webkitTransform = "scale("+winH/desH+")";
-}else{//按照宽度比例去缩放
+}else{
     main.style.webkitTransform = "scale("+winW/desW+")";
 }
 
@@ -35,11 +35,11 @@ function move(e){
         arguments[0].firstElementChild.id="";
 
     });
-    if(movePos>0){/*↓   movePos是正的值*/
+    if(movePos>0){
         this.prevSIndex = (index == 0?oLis.length-1:index-1);
         //oLis[this.prevSIndex].style.webkitTransform = "translate(0,"+(-winH+movePos)+"px)";
         var duration = -winH+movePos;
-    }else if(movePos<0){/*↑*/
+    }else if(movePos<0){
         this.prevSIndex = (index == oLis.length-1?0:index+1);
         //oLis[this.prevSIndex].style.webkitTransform = "translate(0,"+(winH+movePos)+"px)";
         var duration = winH+movePos;
@@ -50,7 +50,7 @@ function move(e){
     oLis[this.prevSIndex].style.display ="block";
 }
 function end(e){
-    if(this.flag){ //为了区分是点击事件还是触摸事件
+    if(this.flag){
         oLis[this.prevSIndex].style.webkitTransform = "translate(0,0)";
         oLis[this.prevSIndex].style.webkitTransition = "0.5s ease-out";
         oLis[this.prevSIndex].addEventListener("webkitTransitionEnd",function(e){
